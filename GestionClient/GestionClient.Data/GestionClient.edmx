@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GestionClientModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cabinet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RAISON_SOCIALE" Type="varchar(max)" Nullable="false" />
+          <Property Name="SIRET" Type="int" />
+          <Property Name="ADRESSE" Type="varchar(max)" />
+          <Property Name="CODE_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="VILLE" Type="varchar" MaxLength="200" />
+          <Property Name="TELEPHONE" Type="varchar" MaxLength="30" />
+          <Property Name="COMMENTAIRE" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Collaborateur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_CABINET" Type="int" Nullable="false" />
+          <Property Name="ROLE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TITRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOM" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PRENOM" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ADRESSE" Type="varchar(max)" />
+          <Property Name="CODE_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="VILLE" Type="varchar" MaxLength="200" />
+          <Property Name="TELEPHONE" Type="varchar" MaxLength="30" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="200" />
+          <Property Name="DATE_CONNAISSANCE" Type="date" />
+          <Property Name="COMMENTAIRE" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Collaborateur_ToCabinet">
+          <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+          <End Role="Collaborateur" Type="Self.Collaborateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabinet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collaborateur">
+              <PropertyRef Name="ID_CABINET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionClientModelStoreContainer">
+          <EntitySet Name="Cabinet" EntityType="Self.Cabinet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collaborateur" EntityType="Self.Collaborateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Collaborateur_ToCabinet" Association="Self.FK_Collaborateur_ToCabinet">
+            <End Role="Cabinet" EntitySet="Cabinet" />
+            <End Role="Collaborateur" EntitySet="Collaborateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionClientModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GestionClientEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Cabinet" EntityType="GestionClientModel.Cabinet" />
+          <EntitySet Name="Collaborateur" EntityType="GestionClientModel.Collaborateur" />
+          <AssociationSet Name="FK_Collaborateur_ToCabinet" Association="GestionClientModel.FK_Collaborateur_ToCabinet">
+            <End Role="Cabinet" EntitySet="Cabinet" />
+            <End Role="Collaborateur" EntitySet="Collaborateur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cabinet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RAISON_SOCIALE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SIRET" Type="Int32" />
+          <Property Name="ADRESSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VILLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TELEPHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Collaborateur" Relationship="GestionClientModel.FK_Collaborateur_ToCabinet" FromRole="Cabinet" ToRole="Collaborateur" />
+        </EntityType>
+        <EntityType Name="Collaborateur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_CABINET" Type="Int32" Nullable="false" />
+          <Property Name="ROLE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TITRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ADRESSE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CODE_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VILLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TELEPHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_CONNAISSANCE" Type="DateTime" Precision="0" />
+          <Property Name="COMMENTAIRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cabinet" Relationship="GestionClientModel.FK_Collaborateur_ToCabinet" FromRole="Collaborateur" ToRole="Cabinet" />
+        </EntityType>
+        <Association Name="FK_Collaborateur_ToCabinet">
+          <End Type="GestionClientModel.Cabinet" Role="Cabinet" Multiplicity="1" />
+          <End Type="GestionClientModel.Collaborateur" Role="Collaborateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabinet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Collaborateur">
+              <PropertyRef Name="ID_CABINET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionClientModelStoreContainer" CdmEntityContainer="GestionClientEntities" >
+          <EntitySetMapping Name="Cabinet">
+            <EntityTypeMapping TypeName="GestionClientModel.Cabinet">
+              <MappingFragment StoreEntitySet="Cabinet">
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="CODE_POSTAL" ColumnName="CODE_POSTAL" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="SIRET" ColumnName="SIRET" />
+                <ScalarProperty Name="RAISON_SOCIALE" ColumnName="RAISON_SOCIALE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collaborateur">
+            <EntityTypeMapping TypeName="GestionClientModel.Collaborateur">
+              <MappingFragment StoreEntitySet="Collaborateur">
+                <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
+                <ScalarProperty Name="DATE_CONNAISSANCE" ColumnName="DATE_CONNAISSANCE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
+                <ScalarProperty Name="VILLE" ColumnName="VILLE" />
+                <ScalarProperty Name="CODE_POSTAL" ColumnName="CODE_POSTAL" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+                <ScalarProperty Name="ID_CABINET" ColumnName="ID_CABINET" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
