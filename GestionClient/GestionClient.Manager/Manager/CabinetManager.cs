@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 using GestionClient.Data;
 using GestionClient.Manager.Interface;
 
-namespace GestionClient.Manager.Manager
+namespace GestionClient.Manager
 {
-    class CabinetManager : GenericManager<GestionClientEntities, Cabinet>
+    public class CabinetManager :
+        CrudManager<GestionClientEntities, Cabinet>,
+        ICabinetManager
     {
-      
+        public override Cabinet GetById(int Id)
+        {
+
+            return Context.Cabinet.FirstOrDefault(c => c.ID == Id);
+
+        }
     }
 }

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RAISON_SOCIALE" Type="varchar(max)" Nullable="false" />
           <Property Name="SIRET" Type="int" />
           <Property Name="ADRESSE" Type="varchar(max)" />
@@ -22,7 +22,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_CABINET" Type="int" Nullable="false" />
           <Property Name="ROLE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TITRE" Type="varchar" MaxLength="50" Nullable="false" />

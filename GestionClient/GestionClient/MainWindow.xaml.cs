@@ -1,6 +1,9 @@
-﻿using System;
+﻿using GestionClient.Service.Interface;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +26,16 @@ namespace GestionClient
         public MainWindow()
         {
             InitializeComponent();
+
+            var kernel = new StandardKernel();
+            kernel.Load(new List<Ninject.Modules.INinjectModule> { new Bindings() });
+
+            var cabinetService = kernel.Get<ICabinetService>();
+
+            var cabinets = cabinetService.GetCabinets();
+
+            lstCabinet.ItemsSource = cabinets;
+
         }
     }
 }

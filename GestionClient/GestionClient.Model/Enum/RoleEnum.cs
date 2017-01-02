@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GestionClient.Data;
 
-namespace GestionClient.Manager.Interface
+namespace GestionClient.Model.Enum
 {
-
-    public interface ICabinetManager : ICrudManager<Cabinet>
-
+    public enum RoleEnum
     {
-
-
+        Praticien,
+        Assistant
     }
-
 }

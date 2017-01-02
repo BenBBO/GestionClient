@@ -95,9 +95,9 @@
       <LastGenOutput>GestionClient.Context.cs</LastGenOutput>
       <DependentUpon>GestionClient.edmx</DependentUpon>
     </Content>
-    <Content Include="GestionClient.mdf">
+    <EmbeddedResource Include="GestionClient.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="GestionClient.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GestionClient.edmx</DependentUpon>

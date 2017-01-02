@@ -5,10 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
-namespace GestionClient.Manager.Manager
+namespace GestionClient.Manager
 {
-    class GenericManager<C, T> :
+    public abstract class CrudManager<C, T> :
         ICrudManager<T> where T : class where C : DbContext, new()
     {
 
@@ -22,10 +23,10 @@ namespace GestionClient.Manager.Manager
         }
 
         #endregion
-        
+
         public virtual void CreateItem(T item)
         {
-            _entities.Set<T>().Add(item);            
+            _entities.Set<T>().Add(item);
         }
 
         public virtual void DeleteItem(T item)
@@ -38,11 +39,20 @@ namespace GestionClient.Manager.Manager
 
             IQueryable<T> query = _entities.Set<T>();
             return query;
-        }        
+        }
+
+        public virtual IEnumerable<T> GetWhere(Expression<Func<T, bool>> predicate)
+        {
+            IQueryable<T> toReturn = _entities.Set<T>().Where(predicate);
+            return toReturn;
+        }
 
         public virtual void UpdateItem(T item)
         {
             _entities.Entry(item).State = EntityState.Modified;
         }
+
+        public abstract T GetById(int Id);
+
     }
 }

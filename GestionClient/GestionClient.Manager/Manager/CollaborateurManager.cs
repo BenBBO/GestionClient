@@ -6,10 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using GestionClient.Data;
 
-namespace GestionClient.Manager.Manager
+namespace GestionClient.Manager
 {
-    class CollaborateurManager : GenericManager<GestionClientEntities, Collaborateur>
+    class CollaborateurManager : 
+        CrudManager<GestionClientEntities, Collaborateur>, 
+        ICollaborateurManager
     {
+        public IEnumerable<Collaborateur> GetByCabinet(int idCabinet)
+        {
+            return Context.Collaborateur.Where(c => c.ID_CABINET == idCabinet);
+        }
 
+        public override Collaborateur GetById(int Id)
+        {
+            return Context.Collaborateur.FirstOrDefault(c => c.ID == Id);
+        }
     }
 }
