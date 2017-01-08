@@ -1,0 +1,77 @@
+﻿using GestionClient.Model.Dto.Cabinet;
+using GestionClient.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+namespace GestionClient.ViewModel
+{
+    public class AcceuilViewModel : BaseViewModel, IBaseViewModel
+    {
+                
+        #region Properties
+
+        private ICabinetService cabinetService;
+        private IEnumerable<CabinetDto> cabinetList;
+        public IEnumerable<CabinetDto> CabinetList
+        {
+            get { return cabinetList; }
+            set
+            {
+                cabinetList = value;
+                this.OnPropertyChanged("CabinetList");
+            }
+        }
+        public string SearchedRaisonSociale { get; set; }
+        public string SearchedVille { get; set; }
+        public ICommand SearchCabinet { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                return "Accueil";
+            }           
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public AcceuilViewModel(ICabinetService cabinetService)
+        {
+            this.cabinetService = cabinetService;
+            refreshCabinets();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void refreshCabinets()
+        {
+            CabinetList = cabinetService.GetCabinets();
+            SearchCabinet = new RelayCommand(p => SearchMethod());
+        }
+
+        private void SearchMethod()
+        {
+
+            CabinetSearchDto searchArgument = new CabinetSearchDto()
+            {
+                RaisonSociale = SearchedRaisonSociale,
+                Ville = SearchedVille
+            };
+
+            CabinetList = cabinetService.GetCabinets(searchArgument);
+
+        }
+
+        #endregion
+        
+    }
+}
