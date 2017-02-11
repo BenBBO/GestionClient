@@ -18,5 +18,15 @@ namespace GestionClient.Manager
             return Context.Cabinet.FirstOrDefault(c => c.ID == Id);
 
         }
+
+        //public override void CreateItem(Cabinet item)
+        //{
+        //    using (var testContext = new GestionClientEntities())
+        //    {
+        //        testContext.Cabinet.Add(item);
+        //        testContext.SaveChangesAsync().Wait();
+        //        var cabinets = this.GetAll();
+        //    }
+        //}
     }
 }

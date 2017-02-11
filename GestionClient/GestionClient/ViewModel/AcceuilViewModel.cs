@@ -1,4 +1,5 @@
-﻿using GestionClient.Model.Dto.Cabinet;
+﻿using GestionClient.Common;
+using GestionClient.Model.Dto.Cabinet;
 using GestionClient.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace GestionClient.ViewModel
 {
     public class AcceuilViewModel : BaseViewModel, IBaseViewModel
     {
-                
+
         #region Properties
 
         private ICabinetService cabinetService;
         private IEnumerable<CabinetDto> cabinetList;
+        public event PageChangeHandler OnPageChange;
+
         public IEnumerable<CabinetDto> CabinetList
         {
             get { return cabinetList; }
@@ -28,15 +31,18 @@ namespace GestionClient.ViewModel
         }
         public string SearchedRaisonSociale { get; set; }
         public string SearchedVille { get; set; }
+        public ICommand AddCabinet { get; set; }
         public ICommand SearchCabinet { get; set; }
+        public ICommand SelectedItemChangedCommand { get; set; }
 
         public string Name
         {
             get
             {
                 return "Accueil";
-            }           
+            }
         }
+        public object Data { get; set; }
 
         #endregion
 
@@ -56,6 +62,25 @@ namespace GestionClient.ViewModel
         {
             CabinetList = cabinetService.GetCabinets();
             SearchCabinet = new RelayCommand(p => SearchMethod());
+            AddCabinet = new RelayCommand(p => AddCabinetMethod());
+            SelectedItemChangedCommand = new RelayCommand(p => SelectCabinet(p));
+        }
+
+        private void SelectCabinet(object p)
+        {
+            var selectedCabinet = (CabinetDto)p;
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(DetailCabinetViewModel),
+                Data = selectedCabinet
+            });
+        }
+
+        private void AddCabinetMethod()
+        {
+
+            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(AddCabinetViewModel) });
+
         }
 
         private void SearchMethod()
@@ -71,7 +96,10 @@ namespace GestionClient.ViewModel
 
         }
 
+
+
+
         #endregion
-        
+
     }
 }

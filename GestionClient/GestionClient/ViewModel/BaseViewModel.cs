@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionClient.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace GestionClient.ViewModel
     public class BaseViewModel : INotifyPropertyChanged
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;        
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -19,6 +20,6 @@ namespace GestionClient.ViewModel
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
+        
     }
 }

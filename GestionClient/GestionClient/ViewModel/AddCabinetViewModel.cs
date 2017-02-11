@@ -1,4 +1,6 @@
-﻿using GestionClient.Service.Interface;
+﻿using GestionClient.Common;
+using GestionClient.Model.Dto.Cabinet;
+using GestionClient.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +10,18 @@ using System.Windows.Input;
 
 namespace GestionClient.ViewModel
 {
-    class AddCabinetViewModel : BaseViewModel, IBaseViewModel
+    public class AddCabinetViewModel : BaseViewModel, IBaseViewModel
     {
 
-        private ICabinetService cabinetService;
-        public ICommand SaveCabinetCommand { get; set; }
+        #region Properties
 
+        private ICabinetService cabinetService;
+        public event PageChangeHandler OnPageChange;
+
+        public ICommand SaveCabinetCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+
+        public CabinetAddDto Cabinet { get; set; }
         public string Name
         {
             get
@@ -22,21 +30,46 @@ namespace GestionClient.ViewModel
             }
         }
 
+
+
+        public object Data
+        {
+            set
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Constructor
 
         public AddCabinetViewModel(ICabinetService cabinetService)
         {
             this.cabinetService = cabinetService;
+            Cabinet = new CabinetAddDto();
 
             SaveCabinetCommand = new RelayCommand(p => SaveCabinet());
+            CancelCommand = new RelayCommand(p => Cancel());
 
         }
 
         #endregion
 
+        #region Methods
+
         private void SaveCabinet()
         {
             //Todo : méthode de sauvegarde d'un cabinet
+            cabinetService.AddCabinet(Cabinet);
+            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(DetailCabinetViewModel) });
         }
+
+        private void Cancel()
+        {
+            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(AcceuilViewModel) });
+        }
+
+        #endregion
     }
 }

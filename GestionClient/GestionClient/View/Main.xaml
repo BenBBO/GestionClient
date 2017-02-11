@@ -11,6 +11,12 @@
         <DataTemplate DataType="{x:Type viewModel:AcceuilViewModel}">
             <local:Accueil />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddCabinetViewModel}">
+            <local:AddCabinet />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:DetailCabinetViewModel}">
+            <local:DetailCabinet />
+        </DataTemplate>
     </Window.Resources>
     <ContentControl Content="{Binding CurrentPageViewModel}" />
 </Window>

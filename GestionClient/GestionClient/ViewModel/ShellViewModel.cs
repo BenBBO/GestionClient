@@ -1,4 +1,5 @@
-﻿using GestionClient.Service.Interface;
+﻿using GestionClient.Common;
+using GestionClient.Service.Interface;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace GestionClient.ViewModel
 {
-    class ShellViewModel : BaseViewModel
+    public class ShellViewModel : BaseViewModel
     {
 
         #region Fields
@@ -29,7 +30,9 @@ namespace GestionClient.ViewModel
             kernel.Load(new List<Ninject.Modules.INinjectModule> { new Bindings() });
 
             // Add available pages
-            PageViewModels.Add(new AcceuilViewModel(GetImplementation<ICabinetService>()));
+            AddPageViewModel(new AcceuilViewModel(GetImplementation<ICabinetService>()));
+            AddPageViewModel(new AddCabinetViewModel(GetImplementation<ICabinetService>()));
+            AddPageViewModel(new DetailCabinetViewModel(GetImplementation<ICabinetService>()));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
@@ -91,9 +94,36 @@ namespace GestionClient.ViewModel
                 .FirstOrDefault(vm => vm == viewModel);
         }
 
+        private void ChangeViewModel(Type viewModel, object Data)
+        {
+
+            CurrentPageViewModel = PageViewModels
+                .FirstOrDefault(vm => vm.GetType() == viewModel);
+            CurrentPageViewModel.Data = Data;
+        }
+
         public T GetImplementation<T>()
         {
             return kernel.Get<T>();
+        }
+
+        private void AddPageViewModel(IBaseViewModel viewModel)
+        {
+            if (viewModel == null)
+            {
+                throw new ArgumentNullException("viewModel");
+            }
+
+
+            viewModel.OnPageChange += ViewModel_OnPageChange;
+
+            PageViewModels.Add(viewModel);
+
+        }
+
+        private void ViewModel_OnPageChange(object sender, PageChangeEvent e)
+        {
+            ChangeViewModel(e.PageViewModelType, e.Data);
         }
 
         #endregion
