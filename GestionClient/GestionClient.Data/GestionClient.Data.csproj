@@ -95,17 +95,10 @@
       <LastGenOutput>GestionClient.Context.cs</LastGenOutput>
       <DependentUpon>GestionClient.edmx</DependentUpon>
     </Content>
-    <EmbeddedResource Include="GestionClient.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Content Include="GestionClient.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GestionClient.edmx</DependentUpon>
       <LastGenOutput>GestionClient.cs</LastGenOutput>
-    </Content>
-    <Content Include="GestionClient_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>GestionClient.mdf</DependentUpon>
     </Content>
     <Content Include="Scripts\v1.0\CREATE_TABLE_CABINET.sql" />
     <Content Include="Scripts\v1.0\CREATE_TABLE_COLLABORATEUR.sql" />

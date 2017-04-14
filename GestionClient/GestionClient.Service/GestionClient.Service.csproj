@@ -42,9 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\ICabinetService.cs" />
+    <Compile Include="Interface\ICollaborateurService.cs" />
+    <Compile Include="Mapping\CollaborateurMapping.cs" />
     <Compile Include="Mapping\CabinetMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CabinetService.cs" />
+    <Compile Include="Service\CollaborateurService.cs" />
     <Compile Include="Utils\PredicateBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

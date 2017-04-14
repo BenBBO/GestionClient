@@ -27,7 +27,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"  
-                                           CommandParameter="{Binding ElementName=lstCabinet, Path=SelectedItem}"/>
+                                           CommandParameter="{Binding ElementName=lstCabinet, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>

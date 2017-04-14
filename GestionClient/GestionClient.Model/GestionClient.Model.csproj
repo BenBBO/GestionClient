@@ -43,8 +43,12 @@
     <Compile Include="Dto\Cabinet\CabinetAddDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetSearchDto.cs" />
+    <Compile Include="Dto\Collaborateur\PraticienAddDto.cs" />
+    <Compile Include="Dto\Collaborateur\AssistantAddDto.cs" />
+    <Compile Include="Dto\Collaborateur\AssistantDto.cs" />
     <Compile Include="Dto\Collaborateur\PraticienDto.cs" />
     <Compile Include="Enum\RoleEnum.cs" />
+    <Compile Include="Enum\TypeCollaborateurEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

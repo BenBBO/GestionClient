@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionClient"
          xmlns:viewModel="clr-namespace:GestionClient.ViewModel"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Title="Main">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:AcceuilViewModel}">
@@ -16,6 +16,12 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailCabinetViewModel}">
             <local:DetailCabinet />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddAssistantViewModel}">
+            <local:DetailAssistant />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddPraticienViewModel}">
+            <local:DetailAssistant />
         </DataTemplate>
     </Window.Resources>
     <ContentControl Content="{Binding CurrentPageViewModel}" />

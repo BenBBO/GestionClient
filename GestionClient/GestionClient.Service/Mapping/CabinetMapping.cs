@@ -43,6 +43,15 @@ namespace GestionClient.Service.Mapping
                         Prenom = c.PRENOM,
                         Titre = c.TITRE
                     });
+
+                toReturn.AssistantList = cabinet.Collaborateur.
+                    Where(c => c.ROLE == RoleEnum.Assistant.ToString()).
+                    Select(c => new AssistantDto()
+                    {
+                        Nom = c.NOM,
+                        Prenom = c.PRENOM,
+                        Titre = c.TITRE
+                    });
             }
 
             return toReturn;

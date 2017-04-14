@@ -20,7 +20,7 @@ namespace GestionClient.Service.Interface
         IEnumerable<CabinetDto> GetCabinets(CabinetSearchDto searchCriteria);
 
         /// <summary>
-        /// Méthode d'ajout d'un nouvea cabinet
+        /// Méthode d'ajout d'un nouveau cabinet
         /// </summary>
         /// <param name="cabinet">Données du cabinet</param>
         void AddCabinet(CabinetAddDto cabinet);

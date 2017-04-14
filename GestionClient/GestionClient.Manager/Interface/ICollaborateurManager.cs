@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestionClient.Manager.Interface
 {
-    interface ICollaborateurManager : ICrudManager<Collaborateur>
+    public interface ICollaborateurManager : ICrudManager<Collaborateur>
     {
         
         /// <summary>

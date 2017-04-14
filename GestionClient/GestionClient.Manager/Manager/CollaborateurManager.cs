@@ -8,7 +8,7 @@ using GestionClient.Data;
 
 namespace GestionClient.Manager
 {
-    class CollaborateurManager : 
+    public class CollaborateurManager : 
         CrudManager<GestionClientEntities, Collaborateur>, 
         ICollaborateurManager
     {

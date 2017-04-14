@@ -30,8 +30,7 @@ namespace GestionClient.Manager
             var entities = _entities.Set<T>();
             entities.Add(item);            
             _entities.SaveChanges();
-
-            var test = GetAll();
+                     
         }
 
         public virtual void DeleteItem(T item)

@@ -17,7 +17,9 @@ namespace GestionClient.Common
         {
             //Hum, du coup l'UI est obligé de référencer le manager ...
             Bind<ICabinetManager>().To<CabinetManager>();
+            Bind<ICollaborateurManager>().To<CollaborateurManager>();
             Bind<ICabinetService>().To<CabinetService>();
+            Bind<ICollaborateurService>().To<CollaborateurService>();
         }
     }
 }

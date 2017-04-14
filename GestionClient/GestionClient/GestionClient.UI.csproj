@@ -87,22 +87,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\PageChangeEvent.cs" />
-    <Compile Include="ViewModel\DetailCabinetViewModel.cs" />
-    <Compile Include="ViewModel\AddCabinetViewModel.cs" />
-    <Compile Include="View\AddCabinet.xaml.cs">
+    <Compile Include="ViewModel\Collaborateur\AddAssistantViewModel.cs" />
+    <Compile Include="ViewModel\Collaborateur\AddPraticienViewModel.cs" />
+    <Compile Include="ViewModel\Cabinet\DetailCabinetViewModel.cs" />
+    <Compile Include="ViewModel\Cabinet\AddCabinetViewModel.cs" />
+    <Compile Include="View\Cabinet\AddCabinet.xaml.cs">
       <DependentUpon>AddCabinet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DetailCabinet.xaml.cs">
+    <Compile Include="View\Cabinet\DetailCabinet.xaml.cs">
       <DependentUpon>DetailCabinet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Collaborateur\DetailAssistant.xaml.cs">
+      <DependentUpon>DetailAssistant.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="ViewModel\AcceuilViewModel.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\IBaseViewModel.cs" />
-    <Compile Include="ViewModel\ShellViewModel.cs" />
+    <Compile Include="ViewModel\Common\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Common\IBaseViewModel.cs" />
+    <Compile Include="ViewModel\Common\ShellViewModel.cs" />
     <Page Include="View\Acceuil.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,11 +121,15 @@
       <DependentUpon>Acceuil.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddCabinet.xaml">
+    <Page Include="View\Cabinet\AddCabinet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DetailCabinet.xaml">
+    <Page Include="View\Cabinet\DetailCabinet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Collaborateur\DetailAssistant.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
