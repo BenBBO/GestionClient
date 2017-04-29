@@ -18,13 +18,28 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="lblRaisonSociale" Grid.Row="0" Grid.Column="1" Content="{Binding Cabinet.RaisonSociale}"
                ContentStringFormat="Détail du cabinet {0}"/>
+
+
         <Button x:Name="btnAddPraticien" Content="Ajouter" HorizontalAlignment="Left" Margin="10,70,0,0" 
                 VerticalAlignment="Top" Width="80" Grid.Column="1" Command="{Binding Path=AddPraticien}" />
-        <Button x:Name="btnAddAssistant" Content="Ajouter" HorizontalAlignment="Left" Margin="10,70,0,0" 
-                VerticalAlignment="Top" Width="80" Grid.Column="2" Command="{Binding Path=AddAssistant}" />
-        <!--<Label x:Name="lblRaisonSociale2" Grid.Row="1" Grid.Column="1"
-               Content="Détail du cabinet"  />-->
 
 
+        <Grid Grid.Column="2" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <ItemsControl ItemsSource="{Binding Cabinet.AssistantList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Nom}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Button x:Name="btnAddAssistant" Content="Ajouter" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Width="80" Grid.Row="1" Command="{Binding Path=AddAssistant}" />
+
+        </Grid>
     </Grid>
 </UserControl>

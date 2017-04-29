@@ -1,12 +1,8 @@
 ﻿using GestionClient.Common;
 using GestionClient.Model.Dto.Cabinet;
 using GestionClient.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using System;
 
 namespace GestionClient.ViewModel
 {
@@ -66,6 +62,10 @@ namespace GestionClient.ViewModel
         private void Cancel()
         {
             OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(AcceuilViewModel) });
+        }
+
+        public void Initialize()
+        {
         }
 
         #endregion

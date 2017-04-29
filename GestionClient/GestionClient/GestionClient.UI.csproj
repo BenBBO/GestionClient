@@ -91,11 +91,15 @@
     <Compile Include="ViewModel\Collaborateur\AddPraticienViewModel.cs" />
     <Compile Include="ViewModel\Cabinet\DetailCabinetViewModel.cs" />
     <Compile Include="ViewModel\Cabinet\AddCabinetViewModel.cs" />
+    <Compile Include="ViewModel\Collaborateur\CollaborateurViewModel.cs" />
     <Compile Include="View\Cabinet\AddCabinet.xaml.cs">
       <DependentUpon>AddCabinet.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Cabinet\DetailCabinet.xaml.cs">
       <DependentUpon>DetailCabinet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Collaborateur\DetailPraticien.xaml.cs">
+      <DependentUpon>DetailPraticien.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Collaborateur\DetailAssistant.xaml.cs">
       <DependentUpon>DetailAssistant.xaml</DependentUpon>
@@ -128,6 +132,10 @@
     <Page Include="View\Cabinet\DetailCabinet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Collaborateur\DetailPraticien.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Collaborateur\DetailAssistant.xaml">
       <SubType>Designer</SubType>

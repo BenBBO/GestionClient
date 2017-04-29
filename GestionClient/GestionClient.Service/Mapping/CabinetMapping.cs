@@ -22,6 +22,8 @@ namespace GestionClient.Service.Mapping
         public static CabinetDto GetCabinetDto(this Cabinet cabinet)
         {
 
+            if (cabinet == null) { return null; }
+
             CabinetDto toReturn = new CabinetDto()
             {
                 IdCabinet = cabinet.ID,

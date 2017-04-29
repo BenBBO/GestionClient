@@ -30,6 +30,7 @@ namespace GestionClient.ViewModel
         }
 
         private CabinetDto _Cabinet;
+        private int _IdCabinet;
         public CabinetDto Cabinet
         {
             get { return _Cabinet; }
@@ -38,7 +39,7 @@ namespace GestionClient.ViewModel
         {
             set
             {
-                _Cabinet = (CabinetDto)value;
+                _IdCabinet = (int)value;
             }
         }
 
@@ -77,6 +78,11 @@ namespace GestionClient.ViewModel
                 Data = Cabinet.IdCabinet
             });
 
+        }
+
+        public void Initialize()
+        {
+            _Cabinet = cabinetService.GetCabinet(_IdCabinet);
         }
 
         #endregion

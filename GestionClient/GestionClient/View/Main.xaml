@@ -21,7 +21,7 @@
             <local:DetailAssistant />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AddPraticienViewModel}">
-            <local:DetailAssistant />
+            <local:DetailPraticien />
         </DataTemplate>
     </Window.Resources>
     <ContentControl Content="{Binding CurrentPageViewModel}" />

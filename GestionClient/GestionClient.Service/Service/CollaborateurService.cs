@@ -36,11 +36,10 @@ namespace GestionClient.Service
 
             if (assistant == null)
             { throw new ArgumentNullException("assistant"); }
-
-
-
-            var toAdd = assistant.GetCabinet();
+            
+            var toAdd = assistant.GetCollaborateur();
             _collaborateurManager.CreateItem(toAdd);
+
         }
 
         public void AddPraticien(PraticienAddDto praticien)

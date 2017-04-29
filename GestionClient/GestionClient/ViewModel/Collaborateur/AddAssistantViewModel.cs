@@ -1,26 +1,20 @@
-﻿using System;
-using GestionClient.Common;
+﻿using GestionClient.Common;
 using GestionClient.Service.Interface;
 using GestionClient.Model.Dto.Collaborateur;
 using System.Windows.Input;
+using System;
 
 namespace GestionClient.ViewModel
 {
-    public class AddAssistantViewModel : BaseViewModel, IBaseViewModel
+    public class AddAssistantViewModel : CollaborateurViewModel
     {
         #region Properties
 
-        public AssistantAddDto Assistant;        
+        public AssistantAddDto Assistant { get; set; }
         public ICommand SaveAssistantCommand { get; set; }
         public ICollaborateurService CollaborateurService { get; }
-        public object Data
-        {
-            set
-            {
-                Assistant.IdCabinet = (int)value;
-            }
-        }
-        public string Name
+
+        public override string Name
         {
             get
             {
@@ -30,35 +24,31 @@ namespace GestionClient.ViewModel
 
         #endregion
 
-        #region Events
-        public event PageChangeHandler OnPageChange;
-        #endregion
-
         #region Constructor
 
-        public AddAssistantViewModel(ICollaborateurService collaborateurService)
+        public AddAssistantViewModel(ICollaborateurService collaborateurService) : base()
         {
             CollaborateurService = collaborateurService;
-            Assistant = new AssistantAddDto();
             SaveAssistantCommand = new RelayCommand(p => SaveAssistant());
         }
 
         #endregion
 
-        #region Private methods
+        #region Methods
+
+        public override void Initialize()
+        {
+            Assistant = new AssistantAddDto();
+        }
 
         private void SaveAssistant()
         {
+            Assistant.IdCabinet = _IdCabinet;
             CollaborateurService.AddAssistant(Assistant);
-            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(DetailCabinetViewModel) });
-        }
-
-        private void Cancel()
-        {
-            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(AcceuilViewModel) });
+            LoadDetailView();
         }
 
         #endregion
-
     }
 }
+

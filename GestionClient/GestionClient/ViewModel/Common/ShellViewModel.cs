@@ -94,11 +94,15 @@ namespace GestionClient.ViewModel
 
         private void ChangeViewModel(IBaseViewModel viewModel)
         {
+
             if (!PageViewModels.Contains(viewModel))
                 PageViewModels.Add(viewModel);
 
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm == viewModel);
+
+            CurrentPageViewModel.Initialize();
+
         }
 
         private void ChangeViewModel(Type viewModel, object Data)
@@ -107,6 +111,9 @@ namespace GestionClient.ViewModel
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm.GetType() == viewModel);
             CurrentPageViewModel.Data = Data;
+
+            CurrentPageViewModel.Initialize();
+
         }
 
         public T GetImplementation<T>()

@@ -13,6 +13,12 @@ namespace GestionClient.Service.Interface
         IEnumerable<CabinetDto> GetCabinets();
 
         /// <summary>
+        /// Récupère les données d'un cabinet
+        /// </summary>
+        /// <param name="idCabinet">Identifiant du cabinet</param>
+        CabinetDto GetCabinet(int idCabinet);
+
+        /// <summary>
         /// Récupérations de tous les cabinets répondant au critères passés en paramètre
         /// </summary>
         /// <param name="searchCriteria">Critère de recherche</param>

@@ -1,20 +1,13 @@
 ﻿using GestionClient.Data;
-using GestionClient.Model.Dto.Cabinet;
 using GestionClient.Model.Dto.Collaborateur;
 using GestionClient.Model.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestionClient.Service.Mapping
 {
     static public class CollaborateurMapping
     {
 
-        public static Collaborateur GetCabinet(this AssistantAddDto assistantAddDto)
+        public static Collaborateur GetCollaborateur(this AssistantAddDto assistantAddDto)
         {
             var toReturn = new Collaborateur
             {

@@ -87,12 +87,15 @@ namespace GestionClient.Service
 
 
             //Todo : Vérification des données
-            
+
             var toAdd = cabinet.GetCabinet();
-            _cabinetManager.CreateItem(toAdd);            
+            _cabinetManager.CreateItem(toAdd);
 
         }
 
-
+        public CabinetDto GetCabinet(int idCabinet)
+        {
+            return _cabinetManager.GetById(idCabinet).GetCabinetDto();
+        }
     }
 }

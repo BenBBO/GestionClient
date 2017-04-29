@@ -74,7 +74,7 @@ namespace GestionClient.ViewModel
                 OnPageChange(this, new PageChangeEvent()
                 {
                     PageViewModelType = typeof(DetailCabinetViewModel),
-                    Data = selectedCabinet
+                    Data = selectedCabinet.IdCabinet
                 });
             }
         }
@@ -96,6 +96,10 @@ namespace GestionClient.ViewModel
 
             CabinetList = cabinetService.GetCabinets(searchArgument);
 
+        }
+
+        public void Initialize()
+        {
         }
 
         #endregion
