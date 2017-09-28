@@ -2,7 +2,6 @@
 using GestionClient.Model.Dto.Cabinet;
 using GestionClient.Service.Interface;
 using System.Windows.Input;
-using System;
 
 namespace GestionClient.ViewModel
 {

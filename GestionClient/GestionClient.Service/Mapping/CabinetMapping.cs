@@ -19,7 +19,7 @@ namespace GestionClient.Service.Mapping
         /// </summary>
         /// <param name="cabinet">Données du cabinet</param>
         /// <returns>Cabinet Dto</returns>
-        public static CabinetDto GetCabinetDto(this Cabinet cabinet)
+        public static CabinetDto GetCabinetDto(this Cabinet cabinet, IEnumerable<Collaborateur> collaborateurs)
         {
 
             if (cabinet == null) { return null; }
@@ -34,10 +34,10 @@ namespace GestionClient.Service.Mapping
             };
 
             //Gestion des praticiens
-            if (cabinet.Collaborateur != null)
+            if (collaborateurs != null)
             {
 
-                toReturn.PraticienList = cabinet.Collaborateur.
+                toReturn.PraticienList = collaborateurs.
                     Where(c => c.ROLE == RoleEnum.Praticien.ToString()).
                     Select(c => new PraticienDto()
                     {
@@ -46,7 +46,7 @@ namespace GestionClient.Service.Mapping
                         Titre = c.TITRE
                     });
 
-                toReturn.AssistantList = cabinet.Collaborateur.
+                toReturn.AssistantList = collaborateurs.
                     Where(c => c.ROLE == RoleEnum.Assistant.ToString()).
                     Select(c => new AssistantDto()
                     {
@@ -54,26 +54,6 @@ namespace GestionClient.Service.Mapping
                         Prenom = c.PRENOM,
                         Titre = c.TITRE
                     });
-            }
-
-            return toReturn;
-
-        }
-
-        /// <summary>
-        /// Mapping d'une liste de cabinet vers une liste de CabinetDto
-        /// </summary>
-        /// <param name="cabinetList">Liste de cabinets</param>
-        /// <returns>Liste de CabinetDto</returns>
-        public static IEnumerable<CabinetDto> GetCabinetDto(this IEnumerable<Cabinet> cabinetList)
-        {
-            List<CabinetDto> toReturn = new List<CabinetDto>();
-
-            foreach (Cabinet item in cabinetList)
-            {
-
-                toReturn.Add(item.GetCabinetDto());
-
             }
 
             return toReturn;

@@ -20,6 +20,7 @@ namespace GestionClient.ViewModel
         public event PageChangeHandler OnPageChange;
         public ICommand AddPraticien { get; set; }
         public ICommand AddAssistant { get; set; }
+        public ICommand Back { get; set; }
 
         public string Name
         {
@@ -29,11 +30,18 @@ namespace GestionClient.ViewModel
             }
         }
 
-        private CabinetDto _Cabinet;
+        private CabinetDto _cabinet;
         private int _IdCabinet;
         public CabinetDto Cabinet
         {
-            get { return _Cabinet; }
+            get {
+                return _cabinet;
+            }
+            set
+            {
+                _cabinet = value;
+                this.OnPropertyChanged("Cabinet");
+            }
         }
         public object Data
         {
@@ -52,6 +60,9 @@ namespace GestionClient.ViewModel
             this.cabinetService = cabinetService;
             AddPraticien = new RelayCommand(p => AddPraticienMethod());
             AddAssistant = new RelayCommand(p => AddAssistantMethod());
+            Back = new RelayCommand(p => BackMethod());
+
+
         }
 
         #endregion
@@ -80,9 +91,19 @@ namespace GestionClient.ViewModel
 
         }
 
+        private void BackMethod()
+        {
+
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(AcceuilViewModel)
+            });
+
+        }
+
         public void Initialize()
         {
-            _Cabinet = cabinetService.GetCabinet(_IdCabinet);
+            _cabinet = cabinetService.GetCabinet(_IdCabinet);
         }
 
         #endregion

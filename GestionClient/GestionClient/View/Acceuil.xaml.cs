@@ -27,7 +27,7 @@ namespace GestionClient
 
         public Accueil()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }       
     }
 }

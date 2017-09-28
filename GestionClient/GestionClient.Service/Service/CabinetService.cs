@@ -16,13 +16,15 @@ namespace GestionClient.Service
     {
 
         private readonly ICabinetManager _cabinetManager;
+        private readonly ICollaborateurManager _collaborateurManager;
 
         #region Constructor
 
-        public CabinetService(ICabinetManager cabinetManager)
+        public CabinetService(ICabinetManager cabinetManager, ICollaborateurManager collaborateurManager)
         {
 
             _cabinetManager = cabinetManager;
+            _collaborateurManager = collaborateurManager;
 
         }
 
@@ -31,8 +33,24 @@ namespace GestionClient.Service
         public IEnumerable<CabinetDto> GetCabinets()
         {
 
+            var toReturn = new List<CabinetDto>();
             var cabinetList = _cabinetManager.GetAll();
-            return cabinetList.GetCabinetDto();
+
+            foreach (Cabinet cabinet in cabinetList)
+            {
+
+                var collaborateurs = _collaborateurManager.GetByCabinet(cabinet.ID);
+                var toAdd = cabinet.GetCabinetDto(collaborateurs);
+
+                if (toAdd != null)
+                {
+                    toReturn.Add(toAdd);
+                }
+
+            }
+
+
+            return toReturn;
 
         }
 
@@ -44,6 +62,8 @@ namespace GestionClient.Service
             }
             else
             {
+
+                var toReturn = new List<CabinetDto>();
 
                 //Création du prédicat de recherche
                 var predicate = PredicateBuilder.True<Cabinet>();
@@ -74,7 +94,20 @@ namespace GestionClient.Service
 
                 }
 
-                return _cabinetManager.GetWhere(predicate).GetCabinetDto();
+                var cabinets = _cabinetManager.GetWhere(predicate);
+                foreach (var cabinet in cabinets)
+                {
+
+                    var toAdd = cabinet.GetCabinetDto(_collaborateurManager.GetByCabinet(cabinet.ID));
+
+                    if (toAdd != null)
+                    {
+                        toReturn.Add(toAdd);
+                    }
+
+                }
+
+                return toReturn;
 
             }
         }
@@ -95,7 +128,16 @@ namespace GestionClient.Service
 
         public CabinetDto GetCabinet(int idCabinet)
         {
-            return _cabinetManager.GetById(idCabinet).GetCabinetDto();
+            var cabinet = _cabinetManager.GetById(idCabinet);
+
+            if (cabinet != null)
+            {
+                var collaborateurs = _collaborateurManager.GetByCabinet(cabinet.ID);
+                return _cabinetManager.GetById(idCabinet).GetCabinetDto(collaborateurs);
+
+            }
+
+            return null;
         }
     }
 }
