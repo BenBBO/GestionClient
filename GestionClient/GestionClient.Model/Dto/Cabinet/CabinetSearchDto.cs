@@ -11,7 +11,7 @@ namespace GestionClient.Model.Dto.Cabinet
 
         public string RaisonSociale { get; set; }
         public string Ville { get; set; }
-        public int? IdPraticien { get; set; }
+        public string Praticien { get; set; }
 
     }
 }

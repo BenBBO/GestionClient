@@ -13,38 +13,67 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <materialDesign:Card HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="16">
+        <materialDesign:Card HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="16" Padding="10">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="8">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <materialDesign:PackIcon Grid.Column="0" Kind="Comment" Foreground="{Binding ElementName=CommentTextBox, Path=BorderBrush}" />
-                <TextBox Grid.Column="1" 		
-				 x:Name="CommentTextBox"
-				 materialDesign:HintAssist.Hint="Comment"
-				    />
 
+                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="0,0,0,10" ><materialDesign:PackIcon Kind="Magnify" />Recherche client</TextBlock>
+                <TextBox Grid.Column="0" Grid.Row="1"  x:Name="txtRaisonSociale" Margin="10,0,0,10" materialDesign:HintAssist.Hint="Raison sociale" 
+                         Text="{Binding SearchedRaisonSociale, Mode=TwoWay}" />
+                <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  x:Name="txtVille" Margin="10,0,0,10" materialDesign:HintAssist.Hint="Ville"
+                         Text="{Binding SearchedVille, Mode=TwoWay}" />
+                <TextBox Grid.Column="0" Grid.Row="2"    x:Name="txtPraticien" Margin="10,0,0,0" materialDesign:HintAssist.Hint="Praticien"
+                    Text="{Binding SearchedPraticien, Mode=TwoWay}"      />
+
+                <Button Margin="0 12 8 4"  ToolTip="Rechercher"
+                        Grid.Row="3" Grid.Column="2" Command="{Binding Path=SearchCabinet}">
+                    <TextBlock>
+                        <materialDesign:PackIcon Kind="Magnify" />
+                        Rechercher
+                    </TextBlock>
+                </Button>
             </Grid>
-
         </materialDesign:Card>
-        
 
-        <ListView Name="lstCabinet" Grid.Row="2"  HorizontalAlignment="Stretch" ItemsSource="{Binding CabinetList}" >
+        <!--Content="{materialDesign:PackIcon AccountPlus}"-->
+        <Button  Grid.Row="1" Command="{Binding Path=AddCabinet}" CommandParameter="{Binding }" HorizontalAlignment="Right"
+                  Margin="0,6,26,10"  ToolTip="Ajouter un cabinet">
+            <TextBlock>
+                <materialDesign:PackIcon Kind="AccountPlus" />
+                Ajouter un cabinet</TextBlock>
+        </Button>
+
+        <ListView Name="lstCabinet" Grid.Row="2"  HorizontalAlignment="Stretch" ItemsSource="{Binding CabinetList}" 
+                  Margin="26,5" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Raison Sociale" DisplayMemberBinding="{Binding RaisonSociale}"/>
-                    <GridViewColumn Header="Praticiens"  />
-                    <GridViewColumn Header="Adresse" />
+                    <GridViewColumn Header="Raison Sociale"  DisplayMemberBinding="{Binding RaisonSociale}"/>
+                    <GridViewColumn Header="Praticiens"    />
+                    <GridViewColumn Header="Adresse" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Adresse}"/>
+                                    <TextBlock Text="{Binding Ville}"/>
+                                    <TextBlock Text="{Binding CodePostal}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
             <i:Interaction.Triggers>
@@ -54,9 +83,5 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-
-        <Button  Grid.Row="2" Command="{Binding Path=AddCabinet}" CommandParameter="{Binding }" />
-
-
     </Grid>
 </UserControl>

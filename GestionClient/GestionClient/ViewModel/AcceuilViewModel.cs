@@ -20,6 +20,7 @@ namespace GestionClient.ViewModel
         private IEnumerable<CabinetDto> cabinetList;
         public event PageChangeHandler OnPageChange;
 
+
         public IEnumerable<CabinetDto> CabinetList
         {
             get { return cabinetList; }
@@ -31,6 +32,7 @@ namespace GestionClient.ViewModel
         }
         public string SearchedRaisonSociale { get; set; }
         public string SearchedVille { get; set; }
+        public string SearchedPraticien { get; set; }
         public ICommand AddCabinet { get; set; }
         public ICommand SearchCabinet { get; set; }
         public ICommand SelectedItemChangedCommand { get; set; }
@@ -91,7 +93,8 @@ namespace GestionClient.ViewModel
             CabinetSearchDto searchArgument = new CabinetSearchDto()
             {
                 RaisonSociale = SearchedRaisonSociale,
-                Ville = SearchedVille
+                Ville = SearchedVille,
+                Praticien = SearchedPraticien
             };
 
             CabinetList = cabinetService.GetCabinets(searchArgument);

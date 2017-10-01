@@ -72,7 +72,7 @@ namespace GestionClient.Service
                 if (!string.IsNullOrWhiteSpace(searchCriteria.RaisonSociale))
                 {
 
-                    predicate.And(c => c.RAISON_SOCIALE.Contains(searchCriteria.RaisonSociale,
+                    predicate = predicate.And(c => c.RAISON_SOCIALE.Contains(searchCriteria.RaisonSociale,
                         StringComparison.InvariantCultureIgnoreCase));
 
                 }
@@ -81,20 +81,22 @@ namespace GestionClient.Service
                 if (!string.IsNullOrWhiteSpace(searchCriteria.Ville))
                 {
 
-                    predicate.And(c => c.VILLE.Contains(searchCriteria.Ville,
+                    predicate = predicate.And(c => c.VILLE.Contains(searchCriteria.Ville,
                         StringComparison.InvariantCultureIgnoreCase));
 
                 }
 
-                if (searchCriteria.IdPraticien.HasValue)
+                if (!string.IsNullOrWhiteSpace(searchCriteria.Praticien))
                 {
 
-                    predicate.And(c => c.Collaborateur != null &&
-                    c.Collaborateur.Any(co => co.ROLE == RoleEnum.Praticien.ToString() && co.ID == searchCriteria.IdPraticien));
+                    predicate = predicate.And(c => c.Collaborateur != null &&
+                                                c.Collaborateur.Any(co => co.ROLE == RoleEnum.Praticien.ToString() &&
+                                                    (co.NOM.Contains(searchCriteria.Praticien, StringComparison.InvariantCultureIgnoreCase) ||
+                                                     co.PRENOM.Contains(searchCriteria.Praticien, StringComparison.InvariantCultureIgnoreCase))));
 
                 }
 
-                var cabinets = _cabinetManager.GetWhere(predicate);
+                var cabinets = _cabinetManager.Search(predicate);
                 foreach (var cabinet in cabinets)
                 {
 

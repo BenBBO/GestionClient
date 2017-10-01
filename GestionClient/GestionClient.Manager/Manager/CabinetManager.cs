@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GestionClient.Data;
 using GestionClient.Manager.Interface;
+using System.Linq.Expressions;
+using LinqKit;
 
 namespace GestionClient.Manager
 {
@@ -18,6 +20,14 @@ namespace GestionClient.Manager
             return Context.Cabinet.FirstOrDefault(c => c.ID == Id);
 
         }
+
+
+        public IEnumerable<Cabinet> Search(Expression<Func<Cabinet, bool>> predicate)
+        {
+
+            return Context.Cabinet.AsEnumerable().Where(predicate.Compile());
+        }
+
 
         //public override void CreateItem(Cabinet item)
         //{

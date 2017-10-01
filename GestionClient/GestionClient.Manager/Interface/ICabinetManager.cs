@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestionClient.Data;
+using System.Linq.Expressions;
 
 namespace GestionClient.Manager.Interface
 {
@@ -12,6 +13,7 @@ namespace GestionClient.Manager.Interface
 
     {
 
+        IEnumerable<Cabinet> Search(Expression<Func<Cabinet, bool>> predicate);
 
     }
 
