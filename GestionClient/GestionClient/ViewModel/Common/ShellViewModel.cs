@@ -37,7 +37,7 @@ namespace GestionClient.ViewModel
             // Add available pages
             AddPageViewModel(new AcceuilViewModel(cabinetService));
             AddPageViewModel(new AddCabinetViewModel(cabinetService));
-            AddPageViewModel(new DetailCabinetViewModel(cabinetService));
+            AddPageViewModel(new DetailCabinetViewModel(cabinetService, collaborateurService));
             AddPageViewModel(new AddAssistantViewModel(collaborateurService));
             AddPageViewModel(new AddPraticienViewModel(collaborateurService));
 

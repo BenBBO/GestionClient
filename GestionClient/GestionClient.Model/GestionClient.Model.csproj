@@ -46,6 +46,7 @@
     <Compile Include="Dto\Collaborateur\PraticienAddDto.cs" />
     <Compile Include="Dto\Collaborateur\AssistantAddDto.cs" />
     <Compile Include="Dto\Collaborateur\AssistantDto.cs" />
+    <Compile Include="Dto\Collaborateur\PraticienDetailDto.cs" />
     <Compile Include="Dto\Collaborateur\PraticienDto.cs" />
     <Compile Include="Enum\RoleEnum.cs" />
     <Compile Include="Enum\TypeCollaborateurEnum.cs" />

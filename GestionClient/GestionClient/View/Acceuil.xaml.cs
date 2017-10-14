@@ -28,6 +28,6 @@ namespace GestionClient
         public Accueil()
         {
             InitializeComponent();        
-        }       
+        }     
     }
 }

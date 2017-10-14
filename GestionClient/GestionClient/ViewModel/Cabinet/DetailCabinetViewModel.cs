@@ -1,5 +1,6 @@
 ﻿using GestionClient.Common;
 using GestionClient.Model.Dto.Cabinet;
+using GestionClient.Model.Dto.Collaborateur;
 using GestionClient.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace GestionClient.ViewModel
         #region Properties
 
         private ICabinetService cabinetService;
+        private ICollaborateurService collaborateurService;
         public event PageChangeHandler OnPageChange;
         public ICommand AddPraticien { get; set; }
         public ICommand AddAssistant { get; set; }
         public ICommand Back { get; set; }
+        public ICommand SelectedPraticienChangedCommand { get; set; }
 
         public string Name
         {
@@ -34,7 +37,8 @@ namespace GestionClient.ViewModel
         private int _IdCabinet;
         public CabinetDto Cabinet
         {
-            get {
+            get
+            {
                 return _cabinet;
             }
             set
@@ -42,6 +46,21 @@ namespace GestionClient.ViewModel
                 _cabinet = value;
                 this.OnPropertyChanged("Cabinet");
             }
+        }
+
+        private PraticienDetailDto _selectedPraticien;
+        public PraticienDetailDto SelectedPraticien
+        {
+            get
+            {
+                return _selectedPraticien;
+            }
+            set
+            {
+                _selectedPraticien = value;
+                this.OnPropertyChanged("SelectedPraticien");
+            }
+
         }
         public object Data
         {
@@ -55,14 +74,14 @@ namespace GestionClient.ViewModel
 
         #region Constructor
 
-        public DetailCabinetViewModel(ICabinetService cabinetService)
+        public DetailCabinetViewModel(ICabinetService cabinetService, ICollaborateurService collaborateurService)
         {
             this.cabinetService = cabinetService;
+            this.collaborateurService = collaborateurService;
             AddPraticien = new RelayCommand(p => AddPraticienMethod());
             AddAssistant = new RelayCommand(p => AddAssistantMethod());
             Back = new RelayCommand(p => BackMethod());
-
-
+            SelectedPraticienChangedCommand = new RelayCommand(p => SelectPraticien(p));
         }
 
         #endregion
@@ -100,6 +119,16 @@ namespace GestionClient.ViewModel
             });
 
         }
+
+        private void SelectPraticien(object p)
+        {
+            if (p != null)
+            {
+                var selectedPraticien = (PraticienDto)p;
+                SelectedPraticien = collaborateurService.GetDetailPraticien(selectedPraticien.Id);
+            }
+        }
+
 
         public void Initialize()
         {

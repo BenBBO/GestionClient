@@ -30,7 +30,8 @@ namespace GestionClient.Service.Mapping
                 RaisonSociale = cabinet.RAISON_SOCIALE,
                 Adresse = cabinet.ADRESSE,
                 CodePostal = cabinet.CODE_POSTAL,
-                Ville = cabinet.VILLE
+                Ville = cabinet.VILLE,
+                Telephone = cabinet.TELEPHONE
             };
 
             //Gestion des praticiens
@@ -41,9 +42,11 @@ namespace GestionClient.Service.Mapping
                     Where(c => c.ROLE == RoleEnum.Praticien.ToString()).
                     Select(c => new PraticienDto()
                     {
+                        Id = c.ID,
                         Nom = c.NOM,
                         Prenom = c.PRENOM,
-                        Titre = c.TITRE
+                        Titre = c.TITRE,
+                        Telephone = c.TELEPHONE                
                     });
 
                 toReturn.AssistantList = collaborateurs.

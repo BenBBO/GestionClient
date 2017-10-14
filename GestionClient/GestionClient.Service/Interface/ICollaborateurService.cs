@@ -22,5 +22,12 @@ namespace GestionClient.Service.Interface
         /// <param name="praticien">Données d'un praticien</param>
         void AddPraticien(PraticienAddDto praticien);
 
+        /// <summary>
+        /// Méthode de récupération du détail d'un praticien
+        /// </summary>
+        /// <param name="idPraticien">Identifiant du praticien</param>
+        /// <returns></returns>
+        PraticienDetailDto GetDetailPraticien(int idPraticien);
+
     }
 }

@@ -52,5 +52,25 @@ namespace GestionClient.Service.Mapping
 
         }
 
+        public static PraticienDetailDto GetDetailPraticien(this Collaborateur collaborateur)
+        {
+            var toReturn = new PraticienDetailDto()
+            {
+                Id = collaborateur.ID,
+                Nom = collaborateur.NOM,
+                Prenom = collaborateur.PRENOM,
+                Titre = collaborateur.TITRE,
+                Telephone = collaborateur.TELEPHONE,
+                Email = collaborateur.EMAIL,
+                Ville = collaborateur.VILLE,
+                Adresse = collaborateur.ADRESSE,
+                CodePostal = collaborateur.CODE_POSTAL,
+                DateConnaissance = collaborateur.DATE_CONNAISSANCE
+            };
+
+            return toReturn;
+
+        }
+
     }
 }

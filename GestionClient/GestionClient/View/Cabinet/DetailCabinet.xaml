@@ -3,42 +3,159 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GestionClient"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <!--<Label x:Name="lblRaisonSociale" Grid.Row="0" Grid.Column="1" Content="{Binding Cabinet.RaisonSociale}"
-               ContentStringFormat="Détail du cabinet {0}"/>-->
+        <TextBlock x:Name="lblRaisonSociale" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignHeadlineTextBlock}"
+                   Text="{Binding Cabinet.RaisonSociale, StringFormat='Détail du cabinet {0}'}" />
 
-        <Grid Grid.Column="1" Grid.Row="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <ItemsControl ItemsSource="{Binding Cabinet.PraticienList}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Nom}" />
-                        
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+        <!--Détail du cabinet-->
+        <materialDesign:Card HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Margin="20,10,10,10" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Mode="PrimaryLight" VerticalAlignment="Stretch" Padding="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Grid.Column="0" Kind="Home" Height="40" Width="40" />
+                        <TextBlock Grid.Column="1" Text="{Binding Cabinet.RaisonSociale, StringFormat='Information du cabinet {0}'}"
+                                       HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                    </Grid>
+                </materialDesign:ColorZone>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
+                    <TextBlock Margin="0 10 0 0">                        
+                        <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="HomeModern" />
+                        <TextBlock Text="{Binding Cabinet.Adresse}"></TextBlock>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">                        
+                        <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="City" />
+                        <TextBlock Text="{Binding Cabinet.FormatedVille}"></TextBlock>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">                        
+                        <materialDesign:PackIcon Margin="0 0 10 0"  Height="20" Width="20" Kind="Phone" />
+                        <TextBlock Text="{Binding Cabinet.FormatedTelephone}"></TextBlock>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">                        
+                        <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="Calendar" />
+                        <TextBlock Text="{Binding Cabinet.DateDerniereIntervention, StringFormat='Date de dernière visite: {0:dd/MM/yyy}'}"></TextBlock>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
 
-            <Button x:Name="btnAddPraticien" Content="Ajouter" HorizontalAlignment="Center"  
-                VerticalAlignment="Bottom" Width="80" Grid.Row="1" Command="{Binding Path=AddPraticien}" />
+        <!--Liste des praticiens-->
+        <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}" HorizontalAlignment="Stretch" Grid.Column="1" 
+                                Grid.Row="1" Margin="20,15,10,10">
+            <materialDesign:Flipper.FrontContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="PrimaryLight" VerticalAlignment="Stretch" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Grid.Column="0" Kind="AccountMultiple" Height="40" Width="40" />
+                            <TextBlock Grid.Column="1" Text="Praticiens" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                            <Button x:Name="btnAddPraticien" Grid.Column="2" Content="{materialDesign:PackIcon AccountPlus}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Ajouter un praticien" 
+                                Command="{Binding Path=AddPraticien}" />
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <ListBox Grid.Row="1" Name="lstPraticien" ItemsSource="{Binding Cabinet.PraticienList}" Margin="10">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectedPraticienChangedCommand}"  
+                                           CommandParameter="{Binding ElementName=lstPraticien, Path=SelectedItem}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding FormatedPraticienName}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </materialDesign:Flipper.FrontContent>
+            <materialDesign:Flipper.BackContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="Accent" VerticalAlignment="Stretch" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                HorizontalAlignment="Left" Height="Auto">
+                                <materialDesign:PackIcon Kind="ArrowLeft" Height="40" Width="40" HorizontalAlignment="Right" />
+                            </Button>
+                            <TextBlock Margin="8 0 0 0" Grid.Column="1" VerticalAlignment="Center">Retour</TextBlock>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="Account" />
+                            <TextBlock Text="{Binding SelectedPraticien.FormatedPraticienName}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="HomeModern" />
+                            <TextBlock Text="{Binding SelectedPraticien.Adresse}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="City" />
+                            <TextBlock Text="{Binding SelectedPraticien.FormatedVille}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0"  Height="20" Width="20" Kind="Phone" />
+                            <TextBlock Text="{Binding SelectedPraticien.FormatedTelephone}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0"  Height="20" Width="20" Kind="Email" />
+                            <TextBlock Text="{Binding SelectedPraticien.Email}"></TextBlock>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Flipper.BackContent>
+        </materialDesign:Flipper>
 
-        </Grid>
-
-        <Grid Grid.Column="2" Grid.Row="0" >
+        <Grid Grid.Column="2" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*" />
                 <RowDefinition Height="1*" />
@@ -50,15 +167,11 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
             <Button x:Name="btnAddAssistant" Content="Ajouter" HorizontalAlignment="Center"
                     VerticalAlignment="Top" Width="80" Grid.Row="1" Command="{Binding Path=AddAssistant}" />
-
-
-
         </Grid>
 
         <Button x:Name="btnBack" Content="Retour" HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom" Width="80" Grid.Column="2" Grid.Row="1" Command="{Binding Path=Back}" />
+                    VerticalAlignment="Bottom" Width="80" Grid.Column="2" Grid.Row="2" Command="{Binding Path=Back}" />
     </Grid>
 </UserControl>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GestionClient.Model.Dto.Collaborateur;
+using GestionClient.Model.Enum;
 
 namespace GestionClient.Service
 {
@@ -49,6 +50,25 @@ namespace GestionClient.Service
 
             var toAdd = praticien.GetCabinet();
             _collaborateurManager.CreateItem(toAdd);
+        }
+
+        public PraticienDetailDto GetDetailPraticien(int idPraticien)
+        {
+
+            var collaborateur = _collaborateurManager.GetById(idPraticien);
+            PraticienDetailDto toReturn = null;
+
+            if(collaborateur != null)
+            {
+                RoleEnum role;
+                if (Enum.TryParse<RoleEnum>(collaborateur.ROLE, out role) && role ==RoleEnum.Praticien)
+                {
+                    toReturn = collaborateur.GetDetailPraticien();
+                }
+
+            }
+
+            return toReturn;
         }
 
         #endregion

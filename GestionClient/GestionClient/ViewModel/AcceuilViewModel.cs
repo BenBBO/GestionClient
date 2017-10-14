@@ -84,7 +84,6 @@ namespace GestionClient.ViewModel
         private void AddCabinetMethod()
         {
             OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(AddCabinetViewModel) });
-
         }
 
         private void SearchMethod()
@@ -103,6 +102,7 @@ namespace GestionClient.ViewModel
 
         public void Initialize()
         {
+            refreshCabinets();
         }
 
         #endregion
