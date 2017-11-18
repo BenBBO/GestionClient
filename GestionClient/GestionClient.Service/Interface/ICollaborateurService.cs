@@ -26,8 +26,36 @@ namespace GestionClient.Service.Interface
         /// Méthode de récupération du détail d'un praticien
         /// </summary>
         /// <param name="idPraticien">Identifiant du praticien</param>
-        /// <returns></returns>
         PraticienDetailDto GetDetailPraticien(int idPraticien);
 
+        /// <summary>
+        /// Méthode de récupération du détail d'un assistant
+        /// </summary>
+        /// <param name="id">Identifiant du collaborateur</param>
+        AssistantDetailDto GetDetailAssistant(int id);
+
+        /// <summary>
+        /// Méthode de récupération des données d'un assistant à éditer
+        /// </summary>
+        /// <param name="id">Identifiant du collaborateur</param>
+        AssistantAddDto GetEditAssistant(int id);
+
+        /// <summary>
+        /// Méthode de récupération des données d'un praticien à éditer
+        /// </summary>
+        /// <param name="id">Identifiant du praticien</param>
+        PraticienAddDto GetEditPraticien(int id);
+
+        /// <summary>
+        /// Méthode d'enregistrement des données d'un assistant
+        /// </summary>
+        /// <param name="assistant"></param>
+        void SaveAssistant(AssistantAddDto assistant);
+
+        /// <summary>
+        /// Méthode d'enregistrement des données d'un praticien
+        /// </summary>
+        /// <param name="praticien"></param>
+        void SavePraticien(PraticienAddDto praticien);
     }
 }

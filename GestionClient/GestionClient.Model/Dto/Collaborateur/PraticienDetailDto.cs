@@ -6,21 +6,10 @@ using System.Threading.Tasks;
 
 namespace GestionClient.Model.Dto.Collaborateur
 {
-    public class PraticienDetailDto : PraticienDto
+    public class PraticienDetailDto :  CollaborateurDetailDto
     {
-        public string Adresse { get; set; }
-        public string CodePostal { get; set; }
+        public string Email { get; set; }
         public DateTime? DateConnaissance { get; set; }
-        public string Ville { get; set; }
-
-        public string FormatedVille
-        {
-            get
-            {
-                return $"{CodePostal} - {Ville}";
-            }
-        }
-
        
     }
 }

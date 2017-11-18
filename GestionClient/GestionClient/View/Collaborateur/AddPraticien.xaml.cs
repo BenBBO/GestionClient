@@ -3,11 +3,11 @@
 namespace GestionClient
 {
     /// <summary>
-    /// Interaction logic for DetailPraticien.xaml
+    /// Interaction logic for AddPraticien.xaml
     /// </summary>
-    public partial class DetailPraticien : UserControl
+    public partial class AddPraticien : UserControl
     {
-        public DetailPraticien()
+        public AddPraticien()
         {
             InitializeComponent();
         }

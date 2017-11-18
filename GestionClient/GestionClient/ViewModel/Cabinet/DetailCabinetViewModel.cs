@@ -15,16 +15,27 @@ namespace GestionClient.ViewModel
     public class DetailCabinetViewModel : BaseViewModel, IBaseViewModel
     {
 
-        #region Properties
+        #region Private members
 
         private ICabinetService cabinetService;
         private ICollaborateurService collaborateurService;
+        private int _IdCabinet;
+        private CabinetDto _cabinet;
+        private PraticienDetailDto _selectedPraticien;
+        private AssistantDetailDto _selectedAssistant;
+
+        #endregion
+        
+        #region Properties      
+
         public event PageChangeHandler OnPageChange;
         public ICommand AddPraticien { get; set; }
         public ICommand AddAssistant { get; set; }
         public ICommand Back { get; set; }
         public ICommand SelectedPraticienChangedCommand { get; set; }
-
+        public ICommand SelectedAssistantChangedCommand { get; set; }
+        public ICommand EditAssitantCommand { get; set; }
+        public ICommand EditPraticienCommand { get; set; }        
         public string Name
         {
             get
@@ -32,9 +43,6 @@ namespace GestionClient.ViewModel
                 return "Détail Cabinet";
             }
         }
-
-        private CabinetDto _cabinet;
-        private int _IdCabinet;
         public CabinetDto Cabinet
         {
             get
@@ -46,9 +54,7 @@ namespace GestionClient.ViewModel
                 _cabinet = value;
                 this.OnPropertyChanged("Cabinet");
             }
-        }
-
-        private PraticienDetailDto _selectedPraticien;
+        }        
         public PraticienDetailDto SelectedPraticien
         {
             get
@@ -60,8 +66,19 @@ namespace GestionClient.ViewModel
                 _selectedPraticien = value;
                 this.OnPropertyChanged("SelectedPraticien");
             }
-
-        }
+        }        
+        public AssistantDetailDto SelectedAssistant
+        {
+            get
+            {
+                return _selectedAssistant;
+            }
+            set
+            {
+                _selectedAssistant = value;
+                this.OnPropertyChanged("SelectedAssistant");
+            }
+        }                
         public object Data
         {
             set
@@ -82,8 +99,19 @@ namespace GestionClient.ViewModel
             AddAssistant = new RelayCommand(p => AddAssistantMethod());
             Back = new RelayCommand(p => BackMethod());
             SelectedPraticienChangedCommand = new RelayCommand(p => SelectPraticien(p));
-        }
+            SelectedAssistantChangedCommand = new RelayCommand(p => SelectAssistant(p));
+            EditAssitantCommand = new RelayCommand(p => EditAssistant());
+            EditPraticienCommand = new RelayCommand(p => EditPraticien());
 
+        }    
+
+        #endregion
+
+        #region Public methods
+        public void Initialize()
+        {
+            _cabinet = cabinetService.GetCabinet(_IdCabinet);
+        } 
         #endregion
 
         #region Private methods
@@ -129,10 +157,31 @@ namespace GestionClient.ViewModel
             }
         }
 
-
-        public void Initialize()
+        private void SelectAssistant(object p)
         {
-            _cabinet = cabinetService.GetCabinet(_IdCabinet);
+            if (p != null)
+            {
+                var selectedAssistant= (AssistantDto)p;
+                SelectedAssistant = collaborateurService.GetDetailAssistant(selectedAssistant.Id);
+            }
+        }
+
+        private void EditAssistant()
+        {
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(EditAssistantViewModel),
+                Data = SelectedAssistant.Id
+            });
+        }
+
+        private void EditPraticien()
+        {
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(EditPraticienViewModel),
+                Data = SelectedPraticien.Id
+            });
         }
 
         #endregion

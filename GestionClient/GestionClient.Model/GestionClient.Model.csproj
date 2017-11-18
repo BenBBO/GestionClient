@@ -43,6 +43,9 @@
     <Compile Include="Dto\Cabinet\CabinetAddDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetSearchDto.cs" />
+    <Compile Include="Dto\Collaborateur\AssistantDetailDto.cs" />
+    <Compile Include="Dto\Collaborateur\CollaborateurDto.cs" />
+    <Compile Include="Dto\Collaborateur\CollaborateurDetailDto.cs" />
     <Compile Include="Dto\Collaborateur\PraticienAddDto.cs" />
     <Compile Include="Dto\Collaborateur\AssistantAddDto.cs" />
     <Compile Include="Dto\Collaborateur\AssistantDto.cs" />

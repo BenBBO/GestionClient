@@ -37,7 +37,6 @@ namespace GestionClient.Service.Mapping
             //Gestion des praticiens
             if (collaborateurs != null)
             {
-
                 toReturn.PraticienList = collaborateurs.
                     Where(c => c.ROLE == RoleEnum.Praticien.ToString()).
                     Select(c => new PraticienDto()
@@ -45,14 +44,14 @@ namespace GestionClient.Service.Mapping
                         Id = c.ID,
                         Nom = c.NOM,
                         Prenom = c.PRENOM,
-                        Titre = c.TITRE,
-                        Telephone = c.TELEPHONE                
+                        Titre = c.TITRE      
                     });
 
                 toReturn.AssistantList = collaborateurs.
                     Where(c => c.ROLE == RoleEnum.Assistant.ToString()).
                     Select(c => new AssistantDto()
                     {
+                        Id = c.ID,
                         Nom = c.NOM,
                         Prenom = c.PRENOM,
                         Titre = c.TITRE

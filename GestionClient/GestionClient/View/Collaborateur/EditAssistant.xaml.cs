@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GestionClient
 {
     /// <summary>
-    /// Interaction logic for DetailAssistant.xaml
+    /// Interaction logic for EditAssistant.xaml
     /// </summary>
-    public partial class DetailAssistant : UserControl
+    public partial class EditAssistant : UserControl
     {
-        public DetailAssistant()
+        public EditAssistant()
         {
             InitializeComponent();
         }

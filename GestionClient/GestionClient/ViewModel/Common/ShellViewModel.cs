@@ -40,6 +40,8 @@ namespace GestionClient.ViewModel
             AddPageViewModel(new DetailCabinetViewModel(cabinetService, collaborateurService));
             AddPageViewModel(new AddAssistantViewModel(collaborateurService));
             AddPageViewModel(new AddPraticienViewModel(collaborateurService));
+            AddPageViewModel(new EditAssistantViewModel(collaborateurService));
+            AddPageViewModel(new EditPraticienViewModel(collaborateurService));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

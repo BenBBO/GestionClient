@@ -4,17 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionClient"
-         xmlns:viewModel="clr-namespace:GestionClient.ViewModel"
+        xmlns:viewModel="clr-namespace:GestionClient.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="16"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Title="Main">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized" Title="Main">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:AcceuilViewModel}">
             <local:Accueil />
@@ -26,10 +25,16 @@
             <local:DetailCabinet />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AddAssistantViewModel}">
-            <local:DetailAssistant />
+            <local:AddAssistant />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AddPraticienViewModel}">
-            <local:DetailPraticien />
+            <local:AddPraticien />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EditAssistantViewModel}">
+            <local:EditAssistant />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EditPraticienViewModel}">
+            <local:EditPraticien />
         </DataTemplate>
     </Window.Resources>
     <ContentControl Content="{Binding CurrentPageViewModel}" />

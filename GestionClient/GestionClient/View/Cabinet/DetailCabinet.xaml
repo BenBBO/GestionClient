@@ -103,7 +103,7 @@
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding FormatedPraticienName}" />
+                                <Label Content="{Binding FormatedName}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -120,6 +120,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"
@@ -127,6 +128,11 @@
                                 <materialDesign:PackIcon Kind="ArrowLeft" Height="40" Width="40" HorizontalAlignment="Right" />
                             </Button>
                             <TextBlock Margin="8 0 0 0" Grid.Column="1" VerticalAlignment="Center">Retour</TextBlock>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Command="{Binding Path=EditPraticienCommand}"
+                                HorizontalAlignment="Right" Height="Auto" ToolTip="Modifier" Grid.Column="2">
+                                <materialDesign:PackIcon Kind="Pencil" Height="40" Width="40" HorizontalAlignment="Right" />
+                            </Button>
                         </Grid>
                     </materialDesign:ColorZone>
                     <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -154,24 +160,95 @@
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
-
-        <Grid Grid.Column="2" Grid.Row="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <ItemsControl ItemsSource="{Binding Cabinet.AssistantList}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Nom}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Button x:Name="btnAddAssistant" Content="Ajouter" HorizontalAlignment="Center"
-                    VerticalAlignment="Top" Width="80" Grid.Row="1" Command="{Binding Path=AddAssistant}" />
-        </Grid>
-
+                
+        <!--Liste des assitants-->
+        <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}" HorizontalAlignment="Stretch" Grid.Column="2" 
+                                Grid.Row="1" Margin="20,15,10,10">
+            <materialDesign:Flipper.FrontContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="PrimaryLight" VerticalAlignment="Stretch" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Grid.Column="0" Kind="AccountMultiple" Height="40" Width="40" />
+                            <TextBlock Grid.Column="1" Text="Assistant(e)(s)" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                            <Button x:Name="btnAddAssistant" Grid.Column="2" Content="{materialDesign:PackIcon AccountPlus}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Ajouter un(e) assistant(e)" 
+                                Command="{Binding Path=AddAssistant}" />
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <ListBox Grid.Row="1" Name="lstAssistant" ItemsSource="{Binding Cabinet.AssistantList}" Margin="10">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectedAssistantChangedCommand}"  
+                                           CommandParameter="{Binding ElementName=lstAssistant, Path=SelectedItem}" />
+                                <i:InvokeCommandAction Command="{x:Static materialDesign:Flipper.FlipCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding FormatedName}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </materialDesign:Flipper.FrontContent>
+            <materialDesign:Flipper.BackContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Mode="Accent" VerticalAlignment="Stretch" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                HorizontalAlignment="Left" Height="Auto">
+                                <materialDesign:PackIcon Kind="ArrowLeft" Height="40" Width="40" HorizontalAlignment="Right" />
+                            </Button>
+                            <TextBlock Margin="8 0 0 0" Grid.Column="1" VerticalAlignment="Center">Retour</TextBlock>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Command="{Binding Path=EditAssitantCommand}"
+                                HorizontalAlignment="Right" Height="Auto" ToolTip="Modifier" Grid.Column="2">
+                                <materialDesign:PackIcon Kind="Pencil" Height="40" Width="40" HorizontalAlignment="Right" />
+                            </Button>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="Account" />
+                            <TextBlock Text="{Binding SelectedAssistant.FormatedName}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="HomeModern" />
+                            <TextBlock Text="{Binding SelectedAssistant.Adresse}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0" Height="20" Width="20" Kind="City" />
+                            <TextBlock Text="{Binding SelectedAssistant.FormatedVille}"></TextBlock>
+                        </TextBlock>
+                        <TextBlock Margin="0 10 0 0">                        
+                            <materialDesign:PackIcon Margin="0 0 10 0"  Height="20" Width="20" Kind="Phone" />
+                            <TextBlock Text="{Binding SelectedAssistant.FormatedTelephone}"></TextBlock>
+                        </TextBlock>                       
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Flipper.BackContent>
+        </materialDesign:Flipper>      
         <Button x:Name="btnBack" Content="Retour" HorizontalAlignment="Center"
                     VerticalAlignment="Bottom" Width="80" Grid.Column="2" Grid.Row="2" Command="{Binding Path=Back}" />
     </Grid>
+    
 </UserControl>

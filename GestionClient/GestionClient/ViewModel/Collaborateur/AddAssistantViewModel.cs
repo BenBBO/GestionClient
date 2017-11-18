@@ -48,6 +48,8 @@ namespace GestionClient.ViewModel
             LoadDetailView();
         }
 
+        
+
         #endregion
     }
 }

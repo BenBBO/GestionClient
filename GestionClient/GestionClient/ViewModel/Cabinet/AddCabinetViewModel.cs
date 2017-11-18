@@ -53,7 +53,6 @@ namespace GestionClient.ViewModel
 
         private void SaveCabinet()
         {
-            //Todo : méthode de sauvegarde d'un cabinet
             cabinetService.AddCabinet(Cabinet);
             OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(DetailCabinetViewModel) });
         }

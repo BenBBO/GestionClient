@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GestionClient.Model.Dto.Collaborateur
 {
-    public class AssistantDto : CollaborateurDto
+    public class AssistantDetailDto : CollaborateurDetailDto
     {
-        
+
     }
 }
