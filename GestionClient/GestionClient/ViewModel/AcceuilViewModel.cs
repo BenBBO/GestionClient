@@ -19,6 +19,7 @@ namespace GestionClient.ViewModel
         private ICabinetService cabinetService;
         private IEnumerable<CabinetDto> cabinetList;
         public event PageChangeHandler OnPageChange;
+        public event MessageDisplayHandler OnMessageDisplay;
 
 
         public IEnumerable<CabinetDto> CabinetList

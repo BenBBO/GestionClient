@@ -14,6 +14,7 @@ namespace GestionClient.ViewModel
         string Name { get; }
         object Data { set; }
         event PageChangeHandler OnPageChange;
+        event MessageDisplayHandler OnMessageDisplay;
         void Initialize();
 
     }

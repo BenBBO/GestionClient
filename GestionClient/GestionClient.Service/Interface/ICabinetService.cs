@@ -19,6 +19,12 @@ namespace GestionClient.Service.Interface
         CabinetDto GetCabinet(int idCabinet);
 
         /// <summary>
+        /// Récupère les données d'un cabinet à éditer
+        /// </summary>
+        /// <param name="idCabinet">Identifiant du cabinet</param>
+        CabinetEditDto GetCabinetToEdit(int idCabinet);
+
+        /// <summary>
         /// Récupérations de tous les cabinets répondant au critères passés en paramètre
         /// </summary>
         /// <param name="searchCriteria">Critère de recherche</param>
@@ -29,7 +35,13 @@ namespace GestionClient.Service.Interface
         /// Méthode d'ajout d'un nouveau cabinet
         /// </summary>
         /// <param name="cabinet">Données du cabinet</param>
-        void AddCabinet(CabinetAddDto cabinet);
+        int AddCabinet(CabinetAddDto cabinet);
+
+        /// <summary>
+        /// Méthode d'édition d'un cabinet
+        /// </summary>
+        /// <param name="cabinet">Données du cabinet</param>
+        void SaveCabinet(CabinetEditDto cabinet);
 
     }
 }

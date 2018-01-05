@@ -29,6 +29,7 @@ namespace GestionClient.ViewModel
         #region Properties      
 
         public event PageChangeHandler OnPageChange;
+        public event MessageDisplayHandler OnMessageDisplay;
         public ICommand AddPraticien { get; set; }
         public ICommand AddAssistant { get; set; }
         public ICommand Back { get; set; }

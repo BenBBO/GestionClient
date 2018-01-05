@@ -50,6 +50,8 @@ namespace GestionClient.ViewModel
         }
         public event PageChangeHandler OnPageChange;
 
+        public event MessageDisplayHandler OnMessageDisplay;
+
         #endregion
 
 
@@ -76,6 +78,7 @@ namespace GestionClient.ViewModel
         private void SavePraticien()
         {
             _collaborateurService.SavePraticien(Praticien);
+            OnMessageDisplay(this, new MessageDisplayEvent() { Message = "Les données ont été enregistrées avec succès" });
         }
 
         public void Initialize()

@@ -15,7 +15,7 @@ namespace GestionClient.Model.Dto.Cabinet
         public string CodePostal { get; set; }
         public string Ville { get; set; }
         public string Telephone { get; set; }
-        
+        public string Email { get; set; }
         public string FormatedVille
         {
             get {

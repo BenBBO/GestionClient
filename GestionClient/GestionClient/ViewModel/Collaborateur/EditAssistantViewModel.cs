@@ -48,7 +48,8 @@ namespace GestionClient.ViewModel
                 return "Modification d'un(e) assistant(e)";
             }
         }
-        public event PageChangeHandler OnPageChange; 
+        public event PageChangeHandler OnPageChange;
+        public event MessageDisplayHandler OnMessageDisplay;
         #endregion
 
 
@@ -79,7 +80,8 @@ namespace GestionClient.ViewModel
 
         private void SaveAssistant()
         {
-            _collaborateurService.SaveAssistant(Assistant);
+            _collaborateurService.SaveAssistant(Assistant);            
+            OnMessageDisplay(this, new MessageDisplayEvent() { Message = "Les données ont été enregistrées avec succès" });
         }
 
     }

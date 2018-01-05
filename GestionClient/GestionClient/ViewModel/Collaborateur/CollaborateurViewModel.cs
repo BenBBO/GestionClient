@@ -13,6 +13,7 @@ namespace GestionClient.ViewModel
 
         #region Events
         public event PageChangeHandler OnPageChange;
+        public event MessageDisplayHandler OnMessageDisplay;
         #endregion
 
         #region Properties
@@ -49,6 +50,11 @@ namespace GestionClient.ViewModel
                 PageViewModelType = typeof(DetailCabinetViewModel),
                 Data = _IdCabinet
             });
+        }
+
+        protected void DisplayMessage(string toDisplay)
+        {
+            OnMessageDisplay(this, new MessageDisplayEvent() { Message = toDisplay });
         }
 
         public abstract void Initialize();

@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type viewModel:AddCabinetViewModel}">
             <local:AddCabinet />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EditCabinetViewModel}">
+            <local:EditCabinet />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:DetailCabinetViewModel}">
             <local:DetailCabinet />
         </DataTemplate>
@@ -37,5 +40,8 @@
             <local:EditPraticien />
         </DataTemplate>
     </Window.Resources>
-    <ContentControl Content="{Binding CurrentPageViewModel}" />
+    <Grid>
+        <materialDesign:Snackbar MessageQueue="{Binding MessageQueue}" Panel.ZIndex="1" VerticalAlignment="Top" />
+        <ContentControl Content="{Binding CurrentPageViewModel}" Panel.ZIndex="0" />
+    </Grid>
 </Window>

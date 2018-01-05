@@ -46,6 +46,7 @@ namespace GestionClient.ViewModel
             Assistant.IdCabinet = _IdCabinet;
             CollaborateurService.AddAssistant(Assistant);
             LoadDetailView();
+            DisplayMessage("L'assistant à été ajouté avec succès");
         }
 
         

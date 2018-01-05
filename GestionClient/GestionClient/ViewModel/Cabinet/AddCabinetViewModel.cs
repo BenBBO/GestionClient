@@ -12,6 +12,7 @@ namespace GestionClient.ViewModel
 
         private ICabinetService cabinetService;
         public event PageChangeHandler OnPageChange;
+        public event MessageDisplayHandler OnMessageDisplay;
 
         public ICommand SaveCabinetCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -53,8 +54,14 @@ namespace GestionClient.ViewModel
 
         private void SaveCabinet()
         {
-            cabinetService.AddCabinet(Cabinet);
-            OnPageChange(this, new PageChangeEvent() { PageViewModelType = typeof(DetailCabinetViewModel) });
+            int cabinetId = cabinetService.AddCabinet(Cabinet);
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(DetailCabinetViewModel),
+                Data = cabinetId
+            });
+            
+            OnMessageDisplay(this, new MessageDisplayEvent() { Message = "Le cabinet à été ajouté avec succès" });
         }
 
         private void Cancel()

@@ -114,7 +114,7 @@ namespace GestionClient.Service
             }
         }
 
-        public void AddCabinet(CabinetAddDto cabinet)
+        public int AddCabinet(CabinetAddDto cabinet)
         {
 
             if (cabinet == null)
@@ -125,6 +125,8 @@ namespace GestionClient.Service
 
             var toAdd = cabinet.GetCabinet();
             _cabinetManager.CreateItem(toAdd);
+
+            return toAdd.ID;
 
         }
 
@@ -141,5 +143,41 @@ namespace GestionClient.Service
 
             return null;
         }
+
+        void SaveCabinet(CabinetEditDto cabinet)
+        {
+
+            if (cabinet == null)
+            { throw new ArgumentNullException("cabinet"); }
+
+
+            var toEdit = _cabinetManager.GetById(cabinet.IdCabinet);
+
+            if (toEdit != null)
+            {
+
+                toEdit.FillEditCabinet(cabinet);
+                _cabinetManager.UpdateItem(toEdit);
+
+            }
+            else
+            {
+                throw new Exception($"Aucun cabinet correspondant à l'identifiant {cabinet.IdCabinet}");
+            }
+
+        }
+
+        public CabinetEditDto GetCabinetToEdit(int idCabinet)
+        {
+            var cabinet = _cabinetManager.GetById(idCabinet);
+
+            if (cabinet != null)
+            {
+                cabinet.GetCabinetEditDto();
+            }
+
+            return null;
+        }
+
     }
 }

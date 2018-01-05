@@ -1,5 +1,6 @@
 ﻿using GestionClient.Common;
 using GestionClient.Service.Interface;
+using MaterialDesignThemes.Wpf;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace GestionClient.ViewModel
             // Add available pages
             AddPageViewModel(new AcceuilViewModel(cabinetService));
             AddPageViewModel(new AddCabinetViewModel(cabinetService));
+            AddPageViewModel(new EditCabinetViewModel(cabinetService));
             AddPageViewModel(new DetailCabinetViewModel(cabinetService, collaborateurService));
             AddPageViewModel(new AddAssistantViewModel(collaborateurService));
             AddPageViewModel(new AddPraticienViewModel(collaborateurService));
@@ -45,6 +47,8 @@ namespace GestionClient.ViewModel
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
+            MessageQueue = new SnackbarMessageQueue();
+            
         }
         #endregion
 
@@ -90,9 +94,12 @@ namespace GestionClient.ViewModel
             }
         }
 
+        public ISnackbarMessageQueue MessageQueue { get; set; }
+
         #endregion
 
         #region Methods
+               
 
         private void ChangeViewModel(IBaseViewModel viewModel)
         {
@@ -132,14 +139,21 @@ namespace GestionClient.ViewModel
 
 
             viewModel.OnPageChange += ViewModel_OnPageChange;
+            viewModel.OnMessageDisplay += ViewModel_OnMessageDisplay;
 
             PageViewModels.Add(viewModel);
-
+            
         }
 
         private void ViewModel_OnPageChange(object sender, PageChangeEvent e)
         {
             ChangeViewModel(e.PageViewModelType, e.Data);
+        }
+
+        private void ViewModel_OnMessageDisplay(object sender, MessageDisplayEvent e)
+        {
+
+            MessageQueue.Enqueue(e.Message);
         }
 
         #endregion

@@ -17,6 +17,7 @@
           <Property Name="VILLE" Type="varchar" MaxLength="200" />
           <Property Name="TELEPHONE" Type="varchar" MaxLength="30" />
           <Property Name="COMMENTAIRE" Type="varchar(max)" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Collaborateur">
           <Key>
@@ -81,6 +82,7 @@
           <Property Name="TELEPHONE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="COMMENTAIRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Collaborateur" Relationship="GestionClientModel.FK_Collaborateur_ToCabinet" FromRole="Cabinet" ToRole="Collaborateur" />
+          <Property Name="EMAIL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Collaborateur">
           <Key>
@@ -122,6 +124,7 @@
           <EntitySetMapping Name="Cabinet">
             <EntityTypeMapping TypeName="GestionClientModel.Cabinet">
               <MappingFragment StoreEntitySet="Cabinet">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="COMMENTAIRE" ColumnName="COMMENTAIRE" />
                 <ScalarProperty Name="TELEPHONE" ColumnName="TELEPHONE" />
                 <ScalarProperty Name="VILLE" ColumnName="VILLE" />

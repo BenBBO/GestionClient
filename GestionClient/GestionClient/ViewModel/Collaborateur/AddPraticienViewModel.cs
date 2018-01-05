@@ -33,7 +33,8 @@ namespace GestionClient.ViewModel
             Praticien.IdCabinet = _IdCabinet;
             CollaborateurService.AddPraticien(Praticien);
             LoadDetailView();
-        }
+            DisplayMessage("Le praticien à été ajouté avec succès");
+         }
 
         public override void Initialize()
         {

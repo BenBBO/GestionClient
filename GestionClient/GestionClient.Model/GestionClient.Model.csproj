@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Dto\Cabinet\CabinetAddDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetDto.cs" />
+    <Compile Include="Dto\Cabinet\CabinetEditDto.cs" />
     <Compile Include="Dto\Cabinet\CabinetSearchDto.cs" />
     <Compile Include="Dto\Collaborateur\AssistantDetailDto.cs" />
     <Compile Include="Dto\Collaborateur\CollaborateurDto.cs" />

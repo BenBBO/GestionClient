@@ -31,7 +31,8 @@ namespace GestionClient.Service.Mapping
                 Adresse = cabinet.ADRESSE,
                 CodePostal = cabinet.CODE_POSTAL,
                 Ville = cabinet.VILLE,
-                Telephone = cabinet.TELEPHONE
+                Telephone = cabinet.TELEPHONE,
+                Email = cabinet.EMAIL
             };
 
             //Gestion des praticiens
@@ -44,7 +45,7 @@ namespace GestionClient.Service.Mapping
                         Id = c.ID,
                         Nom = c.NOM,
                         Prenom = c.PRENOM,
-                        Titre = c.TITRE      
+                        Titre = c.TITRE
                     });
 
                 toReturn.AssistantList = collaborateurs.
@@ -86,6 +87,53 @@ namespace GestionClient.Service.Mapping
             }
 
             return toReturn;
+
+        }
+
+        public static CabinetEditDto GetCabinetEditDto(this Cabinet cabinet)
+        {
+            if (cabinet == null) { return null; }
+
+            var toReturn = new CabinetEditDto()
+            {
+                IdCabinet = cabinet.ID,
+                RaisonSociale = cabinet.RAISON_SOCIALE,
+                Adresse = cabinet.ADRESSE,
+                CodePostal = cabinet.CODE_POSTAL,
+                Ville = cabinet.VILLE,
+                Telephone = cabinet.TELEPHONE,
+                Commentaire = cabinet.COMMENTAIRE,
+                Email = cabinet.EMAIL
+            };
+
+            if (cabinet.SIRET.HasValue)
+            {
+                toReturn.Siret = cabinet.SIRET.Value.ToString();
+            }
+
+            return toReturn;
+
+        }
+
+        public static void FillEditCabinet(this Cabinet cabinet, CabinetEditDto editData)
+        {
+            cabinet.ADRESSE = editData.Adresse;
+            cabinet.CODE_POSTAL = editData.CodePostal;
+            cabinet.COMMENTAIRE = editData.Commentaire;
+            cabinet.RAISON_SOCIALE = editData.RaisonSociale;
+            cabinet.TELEPHONE = editData.Telephone;
+            cabinet.VILLE = editData.Ville;
+            cabinet.EMAIL = editData.Email;
+
+            if (!string.IsNullOrWhiteSpace(editData.Siret))
+            {
+                int intSiret;
+                if (int.TryParse(editData.Siret, out intSiret))
+                {
+                    cabinet.SIRET = intSiret;
+                }
+
+            }
 
         }
 
