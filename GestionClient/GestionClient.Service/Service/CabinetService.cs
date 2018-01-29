@@ -14,9 +14,10 @@ namespace GestionClient.Service
 {
     public class CabinetService : ICabinetService
     {
-
+        #region Private members
         private readonly ICabinetManager _cabinetManager;
         private readonly ICollaborateurManager _collaborateurManager;
+        #endregion
 
         #region Constructor
 
@@ -144,21 +145,18 @@ namespace GestionClient.Service
             return null;
         }
 
-        void SaveCabinet(CabinetEditDto cabinet)
+        public void SaveCabinet(CabinetEditDto cabinet)
         {
 
             if (cabinet == null)
             { throw new ArgumentNullException("cabinet"); }
 
-
             var toEdit = _cabinetManager.GetById(cabinet.IdCabinet);
 
             if (toEdit != null)
             {
-
                 toEdit.FillEditCabinet(cabinet);
                 _cabinetManager.UpdateItem(toEdit);
-
             }
             else
             {
@@ -173,7 +171,7 @@ namespace GestionClient.Service
 
             if (cabinet != null)
             {
-                cabinet.GetCabinetEditDto();
+                return cabinet.GetCabinetEditDto();
             }
 
             return null;

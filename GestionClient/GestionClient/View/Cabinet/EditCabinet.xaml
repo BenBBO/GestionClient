@@ -3,10 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GestionClient"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <materialDesign:ColorZone Mode="Accent" VerticalAlignment="Stretch" Padding="5" Grid.ColumnSpan="2">
+            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Modification du cabinet {0}">
+                        <Binding Path="Cabinet.RaisonSociale" />                        
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </materialDesign:ColorZone>
+
+        <materialDesign:Snackbar MessageQueue="{Binding Notification}"  x:Name="Notification" />
+
+        <Label x:Name="lblRaisonSociale" Grid.Row="1" Content="Raison Sociale" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtRaisonSociale" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.RaisonSociale, Mode=TwoWay}" />
+
+        <Label x:Name="lblSiret" Grid.Row="2" Content="Siret" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtSiret" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.Siret, Mode=TwoWay}" />
+
+        <Label x:Name="lblAdresse" Grid.Row="3" Content="Adresse" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtAdresse" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.Adresse, Mode=TwoWay}" />
+
+        <Label x:Name="lblCodePostal" Grid.Row="4" Content="Code postal" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtCodePostal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.CodePostal, Mode=TwoWay}" />
+
+        <Label x:Name="lblVille" Grid.Row="5" Content="Ville" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtVille" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.Ville, Mode=TwoWay}" />
+
+        <Label x:Name="lblTelephone" Grid.Row="6" Content="Telephone" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtTelephone" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.Telephone, Mode=TwoWay}" />
+
+        <Label x:Name="lblEmail" Grid.Row="7" Content="Email" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtEmail" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" Width="180" VerticalAlignment="Center" Text="{Binding Cabinet.Email, Mode=TwoWay}" />
+        <Label x:Name="lblCommentaire" Grid.Row="6" Content="Commentaire" HorizontalAlignment="Right" Margin="0,0,10,0" 
+                   VerticalAlignment="Center" />
+        <TextBox x:Name="txtCommentaire" Grid.Row="8" Grid.Column="1" AcceptsReturn="True" HorizontalAlignment="Left" Height="70" Margin="10,0,0,0" 
+                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" Width="500" 
+                 Text="{Binding Cabinet.Commentaire, Mode=TwoWay}" />
+
+
+        <Button Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right" Margin="0,0,116,0" 
+                Command="{Binding Path=SaveCommand}">Enregistrer</Button>
+        <Button Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right" Margin="0,0,36,0"
+                Command="{Binding Path=CancelCommand}">Annuler</Button>
+
     </Grid>
 </UserControl>

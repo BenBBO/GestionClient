@@ -43,10 +43,14 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <materialDesign:PackIcon Grid.Column="0" Kind="Home" Height="40" Width="40" />
                         <TextBlock Grid.Column="1" Text="{Binding Cabinet.RaisonSociale, StringFormat='Information du cabinet {0}'}"
                                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+                        <Button x:Name="btnEditCabinet" Grid.Column="2" Content="{materialDesign:PackIcon Pencil}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Modifier le cabinet" 
+                                Command="{Binding Path=EditCabinetCommand}" />
                     </Grid>
                 </materialDesign:ColorZone>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">

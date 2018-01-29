@@ -25,7 +25,7 @@ namespace GestionClient.ViewModel
         private AssistantDetailDto _selectedAssistant;
 
         #endregion
-        
+
         #region Properties      
 
         public event PageChangeHandler OnPageChange;
@@ -36,7 +36,8 @@ namespace GestionClient.ViewModel
         public ICommand SelectedPraticienChangedCommand { get; set; }
         public ICommand SelectedAssistantChangedCommand { get; set; }
         public ICommand EditAssitantCommand { get; set; }
-        public ICommand EditPraticienCommand { get; set; }        
+        public ICommand EditPraticienCommand { get; set; }
+        public ICommand EditCabinetCommand { get; set; }
         public string Name
         {
             get
@@ -55,7 +56,7 @@ namespace GestionClient.ViewModel
                 _cabinet = value;
                 this.OnPropertyChanged("Cabinet");
             }
-        }        
+        }
         public PraticienDetailDto SelectedPraticien
         {
             get
@@ -67,7 +68,7 @@ namespace GestionClient.ViewModel
                 _selectedPraticien = value;
                 this.OnPropertyChanged("SelectedPraticien");
             }
-        }        
+        }
         public AssistantDetailDto SelectedAssistant
         {
             get
@@ -79,7 +80,7 @@ namespace GestionClient.ViewModel
                 _selectedAssistant = value;
                 this.OnPropertyChanged("SelectedAssistant");
             }
-        }                
+        }
         public object Data
         {
             set
@@ -103,8 +104,10 @@ namespace GestionClient.ViewModel
             SelectedAssistantChangedCommand = new RelayCommand(p => SelectAssistant(p));
             EditAssitantCommand = new RelayCommand(p => EditAssistant());
             EditPraticienCommand = new RelayCommand(p => EditPraticien());
+            EditCabinetCommand = new RelayCommand(p => EditCabinet());
 
-        }    
+
+        }
 
         #endregion
 
@@ -112,7 +115,7 @@ namespace GestionClient.ViewModel
         public void Initialize()
         {
             _cabinet = cabinetService.GetCabinet(_IdCabinet);
-        } 
+        }
         #endregion
 
         #region Private methods
@@ -162,7 +165,7 @@ namespace GestionClient.ViewModel
         {
             if (p != null)
             {
-                var selectedAssistant= (AssistantDto)p;
+                var selectedAssistant = (AssistantDto)p;
                 SelectedAssistant = collaborateurService.GetDetailAssistant(selectedAssistant.Id);
             }
         }
@@ -182,6 +185,15 @@ namespace GestionClient.ViewModel
             {
                 PageViewModelType = typeof(EditPraticienViewModel),
                 Data = SelectedPraticien.Id
+            });
+        }
+
+        private void EditCabinet()
+        {
+            OnPageChange(this, new PageChangeEvent()
+            {
+                PageViewModelType = typeof(EditCabinetViewModel),
+                Data = _IdCabinet
             });
         }
 

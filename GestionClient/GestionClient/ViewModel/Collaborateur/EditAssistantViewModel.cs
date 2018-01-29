@@ -52,7 +52,6 @@ namespace GestionClient.ViewModel
         public event MessageDisplayHandler OnMessageDisplay;
         #endregion
 
-
         #region Constructor
         public EditAssistantViewModel(ICollaborateurService collaborateurService)
         {
@@ -61,14 +60,12 @@ namespace GestionClient.ViewModel
             SaveCommand = new RelayCommand(p => SaveAssistant());
         }    
         #endregion
-
-
+        
         public void Initialize()
         {
             _assistant = _collaborateurService.GetEditAssistant(_IdCollaborateur);
         }
-
-
+        
         private void BackToDetail()
         {
             OnPageChange(this, new PageChangeEvent()

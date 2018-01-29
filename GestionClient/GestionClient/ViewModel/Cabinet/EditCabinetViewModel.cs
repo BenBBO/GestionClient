@@ -32,6 +32,13 @@ namespace GestionClient.ViewModel
         }
         public ICommand CancelCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public CabinetEditDto Cabinet
+        {
+            get
+            {
+                return _cabinet;
+            }
+        }
         public object Data
         {
             set
@@ -49,11 +56,11 @@ namespace GestionClient.ViewModel
         #region Constructor
         public EditCabinetViewModel(ICabinetService cabinetService)
         {
-            cabinetService = _cabinetService;
+            _cabinetService = cabinetService;
             CancelCommand = new RelayCommand(p => BackToDetail());
             SaveCommand = new RelayCommand(p => SaveCabinet());
 
-        }        
+        }
         #endregion
 
 
